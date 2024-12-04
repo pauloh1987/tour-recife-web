@@ -9,234 +9,188 @@ import {
   Button 
 } from 'react-native';
 
-// Dados dos pontos turísticos organizados por proximidade
+// Dados dos pontos turísticos organizados por proximidade com o texto detalhado do dia
 const roteirosPorDias = {
   1: [
     {
-      name: "Praia de Boa Viagem",
-      description: "Uma das praias mais famosas de Recife, com águas mornas e recifes naturais.",
-      address: 'Av. Boa Viagem, Boa Viagem, Recife - PE, 51011-000',
-      latitude: -8.114217,
-      longitude: -34.903281,
-      category: 'Praia',
-      image: require('./assets/boa-viagem.png'),
-      moreInfo: 'Perfeita para relaxar, praticar esportes e aproveitar o calçadão.'
-    },
-    {
-      name: "Marco Zero",
-      description: "Ponto inicial e coração cultural do Recife.",
-      address: 'Praça Rio Branco, Recife Antigo, Recife - PE, 50030-310',
-      latitude: -8.063173,
-      longitude: -34.871140,
-      category: 'Histórico',
-      image: require('./assets/marco-zero.png'),
-      moreInfo: 'Conheça as famosas esculturas e aprecie a vista do porto.'
-    },
+      name: "1° Dia – Recife Antigo e Catamarã",
+      description: "Explore o Recife Antigo com seus centros culturais e finalize o dia com um passeio de Catamarã.",
+      image: require('./assets/recife-bg.jpg'),
+      locations: [
+        {
+          name: "Marco Zero",
+          description: "Ponto inicial e coração cultural do Recife. Conheça as famosas esculturas e aprecie a vista do porto.",
+          image: require('./assets/marco-zero.png'),
+        },
+        {
+          name: "Passeio de Catamarã",
+          description: "Passeio de barco pelos rios de Recife ao pôr do sol.",
+          image: require('./assets/catamara.png'),
+        }
+      ]
+    }
   ],
   2: [
     {
-      name: "Praia de Boa Viagem",
-      description: "Uma das praias mais famosas de Recife, com águas mornas e recifes naturais.",
-      address: 'Av. Boa Viagem, Boa Viagem, Recife - PE, 51011-000',
-      latitude: -8.114217,
-      longitude: -34.903281,
-      category: 'Praia',
-      image: require('./assets/boa-viagem.png'),
-      moreInfo: 'Perfeita para relaxar, praticar esportes e aproveitar o calçadão.'
+      name: "2° Dia – Recife Antigo e Museu Cais do Sertão",
+      description: "Explore o Recife Antigo e se encante com o Museu Cais do Sertão.",
+      image: require('./assets/recife-bg.jpg'),
+      locations: [
+        {
+          name: "Marco Zero",
+          description: "Ponto inicial e coração cultural do Recife. Conheça as famosas esculturas e aprecie a vista do porto.",
+          image: require('./assets/marco-zero.png'),
+        },
+        {
+          name: "Museu Cais do Sertão",
+          description: "Museu moderno sobre o sertão nordestino. Um passeio cultural e interativo pelo universo sertanejo.",
+          image: require('./assets/cais-do-sertao.png'),
+        }
+      ]
     },
     {
-      name: "Marco Zero",
-      description: "Ponto inicial e coração cultural do Recife.",
-      address: 'Praça Rio Branco, Recife Antigo, Recife - PE, 50030-310',
-      latitude: -8.063173,
-      longitude: -34.871140,
-      category: 'Histórico',
-      image: require('./assets/marco-zero.png'),
-      moreInfo: 'Conheça as famosas esculturas e aprecie a vista do porto.'
-    },
-    {
-      name: "Paço do Frevo",
-      description: "Espaço cultural dedicado ao frevo, patrimônio imaterial da humanidade.",
-      address: 'Praça do Arsenal da Marinha, Recife Antigo, Recife - PE, 50030-360',
-      latitude: -8.062017,
-      longitude: -34.871080,
-      category: 'Museu',
+      name: "2° Dia – Paço do Frevo e Praia de Boa Viagem",
+      description: "Descubra o Paço do Frevo, um centro cultural dedicado ao frevo, e termine o dia na famosa Praia de Boa Viagem.",
       image: require('./assets/paco-do-frevo.png'),
-      moreInfo: 'Um mergulho na história do frevo com oficinas interativas.'
-    },
+      locations: [
+        {
+          name: "Paço do Frevo",
+          description: "Espaço cultural dedicado ao frevo, patrimônio imaterial da humanidade. Um mergulho na história do frevo com oficinas interativas.",
+          image: require('./assets/paco-do-frevo.png'),
+        },
+        {
+          name: "Praia de Boa Viagem",
+          description: "Uma das praias mais famosas de Recife, com águas mornas e recifes naturais. Perfeita para relaxar, praticar esportes e aproveitar o calçadão.",
+          image: require('./assets/boa-viagem.png'),
+        }
+      ]
+    }
   ],
   3: [
     {
-      name: "Praia de Boa Viagem",
-      description: "Uma das praias mais famosas de Recife, com águas mornas e recifes naturais.",
-      address: 'Av. Boa Viagem, Boa Viagem, Recife - PE, 51011-000',
-      latitude: -8.114217,
-      longitude: -34.903281,
-      category: 'Praia',
-      image: require('./assets/boa-viagem.png'),
-      moreInfo: 'Perfeita para relaxar, praticar esportes e aproveitar o calçadão.'
-    },
-    {
-      name: "Marco Zero",
-      description: "Ponto inicial e coração cultural do Recife.",
-      address: 'Praça Rio Branco, Recife Antigo, Recife - PE, 50030-310',
-      latitude: -8.063173,
-      longitude: -34.871140,
-      category: 'Histórico',
-      image: require('./assets/marco-zero.png'),
-      moreInfo: 'Conheça as famosas esculturas e aprecie a vista do porto.'
-    },
-    {
-      name: "Paço do Frevo",
-      description: "Espaço cultural dedicado ao frevo, patrimônio imaterial da humanidade.",
-      address: 'Praça do Arsenal da Marinha, Recife Antigo, Recife - PE, 50030-360',
-      latitude: -8.062017,
-      longitude: -34.871080,
-      category: 'Museu',
-      image: require('./assets/paco-do-frevo.png'),
-      moreInfo: 'Um mergulho na história do frevo com oficinas interativas.'
-    },
-    {
-      name: "Rua do Bom Jesus",
-      description: "Rua histórica com igrejas, lojas e um dos principais pontos turísticos de Recife Antigo.",
-      address: 'Recife Antigo, Recife - PE, 50030-090',
-      latitude: -8.062732,
-      longitude: -34.871153,
-      category: 'Histórico',
-      image: require('./assets/rua-do-bom-jesus.png'),
-      moreInfo: 'Lar da primeira sinagoga das Américas.'
-    },
+      name: "3° Dia – Marco Zero, Rua do Bom Jesus e Shopping Recife",
+      description: "Comece o dia explorando a história no Marco Zero e na Rua do Bom Jesus, seguida de um passeio relaxante no Shopping Recife.",
+      image: require('./assets/recife-bg.jpg'),
+      locations: [
+        {
+          name: "Marco Zero",
+          description: "Ponto inicial e coração cultural do Recife. Conheça as famosas esculturas e aprecie a vista do porto.",
+          image: require('./assets/marco-zero.png'),
+        },
+        {
+          name: "Rua do Bom Jesus",
+          description: "Rua histórica com igrejas, lojas e um dos principais pontos turísticos de Recife Antigo. Lar da primeira sinagoga das Américas.",
+          image: require('./assets/rua-do-bom-jesus.png'),
+        },
+        {
+          name: "Shopping Recife",
+          description: "Grande shopping center com lojas e entretenimento. Oferece eventos culturais e espaço kids.",
+          image: require('./assets/shopping-recife.png'),
+        }
+      ]
+    }
   ],
   4: [
     {
-      name: "Praia de Boa Viagem",
-      description: "Uma das praias mais famosas de Recife, com águas mornas e recifes naturais.",
-      address: 'Av. Boa Viagem, Boa Viagem, Recife - PE, 51011-000',
-      latitude: -8.114217,
-      longitude: -34.903281,
-      category: 'Praia',
-      image: require('./assets/boa-viagem.png'),
-      moreInfo: 'Perfeita para relaxar, praticar esportes e aproveitar o calçadão.'
-    },
-    {
-      name: "Marco Zero",
-      description: "Ponto inicial e coração cultural do Recife.",
-      address: 'Praça Rio Branco, Recife Antigo, Recife - PE, 50030-310',
-      latitude: -8.063173,
-      longitude: -34.871140,
-      category: 'Histórico',
-      image: require('./assets/marco-zero.png'),
-      moreInfo: 'Conheça as famosas esculturas e aprecie a vista do porto.'
-    },
-    {
-      name: "Paço do Frevo",
-      description: "Espaço cultural dedicado ao frevo, patrimônio imaterial da humanidade.",
-      address: 'Praça do Arsenal da Marinha, Recife Antigo, Recife - PE, 50030-360',
-      latitude: -8.062017,
-      longitude: -34.871080,
-      category: 'Museu',
-      image: require('./assets/paco-do-frevo.png'),
-      moreInfo: 'Um mergulho na história do frevo com oficinas interativas.'
-    },
-    {
-      name: "Rua do Bom Jesus",
-      description: "Rua histórica com igrejas, lojas e um dos principais pontos turísticos de Recife Antigo.",
-      address: 'Recife Antigo, Recife - PE, 50030-090',
-      latitude: -8.062732,
-      longitude: -34.871153,
-      category: 'Histórico',
-      image: require('./assets/rua-do-bom-jesus.png'),
-      moreInfo: 'Lar da primeira sinagoga das Américas.'
-    },
-    {
-      name: "Shopping Recife",
-      description: "Grande shopping center com lojas e entretenimento.",
-      address: 'R. Padre Carapuceiro, 777, Boa Viagem, Recife - PE, 51020-280',
-      latitude: -8.112005,
-      longitude: -34.894401,
-      category: 'Shoppings',
-      image: require('./assets/shopping-recife.png'),
-      moreInfo: 'Oferece eventos culturais e espaço kids.'
-    },
+      name: "4° Dia – Marco Zero, Shopping RioMar e Paço do Frevo",
+      description: "Combine história, compras e cultura com uma visita ao Marco Zero, ao shopping RioMar e ao Paço do Frevo.",
+      image: require('./assets/recife-bg.jpg'),
+      locations: [
+        {
+          name: "Marco Zero",
+          description: "Ponto inicial e coração cultural do Recife. Conheça as famosas esculturas e aprecie a vista do porto.",
+          image: require('./assets/marco-zero.png'),
+        },
+        {
+          name: "Shopping RioMar",
+          description: "Centro comercial com diversas opções de lojas, restaurantes e cinemas.",
+          image: require('./assets/shopping-riomar.png'),
+        },
+        {
+          name: "Paço do Frevo",
+          description: "Espaço cultural dedicado ao frevo, patrimônio imaterial da humanidade.",
+          image: require('./assets/paco-do-frevo.png'),
+        }
+      ]
+    }
   ],
   5: [
-    // Adicione os pontos turísticos aqui, conforme os requisitos para 5 dias
+    {
+      name: "5° Dia – Paço do Frevo, Igreja Madre de Deus, Mercado de São José",
+      description: "Aprofunde-se na cultura local com o Paço do Frevo e visite a Igreja Madre de Deus e o Mercado de São José.",
+      image: require('./assets/mercado-de-sao-jose.png'),
+      locations: [
+        {
+          name: "Paço do Frevo",
+          description: "Espaço cultural dedicado ao frevo, patrimônio imaterial da humanidade.",
+          image: require('./assets/paco-do-frevo.png'),
+        },
+        {
+          name: "Igreja Madre de Deus",
+          description: "Igreja barroca do século XVII. Atração histórica e religiosa imperdível.",
+          image: require('./assets/igreja-madre-de-deus.png'),
+        },
+        {
+          name: "Mercado de São José",
+          description: "Mercado tradicional com artesanato e comidas típicas.",
+          image: require('./assets/mercado-de-sao-jose.png'),
+        }
+      ]
+    }
   ],
   6: [
-    // Adicione os pontos turísticos aqui, conforme os requisitos para 6 dias
+    {
+      name: "6° Dia – Forte das Cinco Pontas, Museu Cais do Sertão e Parque Dona Lindu",
+      description: "Explore a história do Recife no Forte das Cinco Pontas e no Museu Cais do Sertão, e depois relaxe no Parque Dona Lindu.",
+      image: require('./assets/forte-cinco-pontas.png'),
+      locations: [
+        {
+          name: "Forte das Cinco Pontas",
+          description: "Fortaleza histórica com museu sobre o Recife.",
+          image: require('./assets/forte-cinco-pontas.png'),
+        },
+        {
+          name: "Museu Cais do Sertão",
+          description: "Museu moderno sobre o sertão nordestino.",
+          image: require('./assets/cais-do-sertao.png'),
+        },
+        {
+          name: "Parque Dona Lindu",
+          description: "Parque com projeto de Oscar Niemeyer, ideal para lazer e caminhadas.",
+          image: require('./assets/parque-dona-lindu.png'),
+        }
+      ]
+    }
   ],
   7: [
     {
-      name: "Praia de Boa Viagem",
-      description: "Uma das praias mais famosas de Recife, com águas mornas e recifes naturais.",
-      address: 'Av. Boa Viagem, Boa Viagem, Recife - PE, 51011-000',
-      latitude: -8.114217,
-      longitude: -34.903281,
-      category: 'Praia',
-      image: require('./assets/boa-viagem.png'),
-      moreInfo: 'Perfeita para relaxar, praticar esportes e aproveitar o calçadão.'
-    },
-    {
-      name: "Marco Zero",
-      description: "Ponto inicial e coração cultural do Recife.",
-      address: 'Praça Rio Branco, Recife Antigo, Recife - PE, 50030-310',
-      latitude: -8.063173,
-      longitude: -34.871140,
-      category: 'Histórico',
-      image: require('./assets/marco-zero.png'),
-      moreInfo: 'Conheça as famosas esculturas e aprecie a vista do porto.'
-    },
-    {
-      name: "Paço do Frevo",
-      description: "Espaço cultural dedicado ao frevo, patrimônio imaterial da humanidade.",
-      address: 'Praça do Arsenal da Marinha, Recife Antigo, Recife - PE, 50030-360',
-      latitude: -8.062017,
-      longitude: -34.871080,
-      category: 'Museu',
-      image: require('./assets/paco-do-frevo.png'),
-      moreInfo: 'Um mergulho na história do frevo com oficinas interativas.'
-    },
-    {
-      name: "Rua do Bom Jesus",
-      description: "Rua histórica com igrejas, lojas e um dos principais pontos turísticos de Recife Antigo.",
-      address: 'Recife Antigo, Recife - PE, 50030-090',
-      latitude: -8.062732,
-      longitude: -34.871153,
-      category: 'Histórico',
-      image: require('./assets/rua-do-bom-jesus.png'),
-      moreInfo: 'Lar da primeira sinagoga das Américas.'
-    },
-    {
-      name: "Shopping Recife",
-      description: "Grande shopping center com lojas e entretenimento.",
-      address: 'R. Padre Carapuceiro, 777, Boa Viagem, Recife - PE, 51020-280',
-      latitude: -8.112005,
-      longitude: -34.894401,
-      category: 'Shoppings',
-      image: require('./assets/shopping-recife.png'),
-      moreInfo: 'Oferece eventos culturais e espaço kids.'
-    },
-    {
-      name: "Museu Cais do Sertão",
-      description: "Museu moderno sobre o sertão nordestino.",
-      address: 'Av. Alfredo Lisboa, Recife Antigo, Recife - PE, 50030-150',
-      latitude: -8.062506,
-      longitude: -34.870977,
-      category: 'Museu',
-      image: require('./assets/cais-do-sertao.png'),
-      moreInfo: 'Um passeio cultural e interativo pelo universo sertanejo.'
-    },
-    {
-      name: "Forte das Cinco Pontas",
-      description: "Fortaleza histórica com museu sobre o Recife.",
-      address: 'Praça das Cinco Pontas, São José, Recife - PE, 50020-100',
-      latitude: -8.075064,
-      longitude: -34.876013,
-      category: 'Histórico',
-      image: require('./assets/forte-cinco-pontas.png'),
-      moreInfo: 'O forte abriga um museu que conta a história do Recife.'
-    },
-  ],
+      name: "7° Dia – Praça do Arsenal, Igreja Madre de Deus, Museu do Frevo e Mercado de São José",
+      description: "Combine cultura e lazer visitando a Praça do Arsenal, Igreja Madre de Deus, Museu do Frevo e Mercado de São José.",
+      image: require('./assets/praca-do-arsenal.png'),
+      locations: [
+        {
+          name: "Praça do Arsenal",
+          description: "Praça no Recife Antigo com bares e eventos culturais.",
+          image: require('./assets/praca-do-arsenal.png'),
+        },
+        {
+          name: "Igreja Madre de Deus",
+          description: "Igreja barroca do século XVII.",
+          image: require('./assets/igreja-madre-de-deus.png'),
+        },
+        {
+          name: "Museu do Frevo",
+          description: "Museu dedicado ao Frevo, patrimônio cultural de Pernambuco.",
+          image: require('./assets/paco-do-frevo.png'),
+        },
+        {
+          name: "Mercado de São José",
+          description: "Mercado tradicional com artesanato e comidas típicas.",
+          image: require('./assets/mercado-de-sao-jose.png'),
+        }
+      ]
+    }
+  ]
 };
 
 const RoteirosScreen = () => {
@@ -270,9 +224,15 @@ const RoteirosScreen = () => {
       <View style={styles.roteiroContainer}>
         {roteiro.map((item, index) => (
           <View key={index} style={styles.pontoContainer}>
-            <Image source={item.image} style={styles.image} />
             <Text style={styles.pontoTitle}>{item.name}</Text>
             <Text style={styles.pontoDescription}>{item.description}</Text>
+            {item.locations.map((loc, idx) => (
+              <View key={idx} style={styles.locationContainer}>
+                <Text style={styles.locationTitle}>{loc.name}</Text>
+                <Text style={styles.locationDescription}>{loc.description}</Text>
+                <Image source={loc.image} style={styles.locationImage} />
+              </View>
+            ))}
           </View>
         ))}
       </View>
@@ -311,6 +271,25 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 200,
     borderRadius: 10,
+  },
+  locationContainer: {
+    marginTop: 10,
+    marginBottom: 15,
+  },
+  locationTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  locationDescription: {
+    fontSize: 16,
+    color: 'gray',
+  },
+  locationImage: {
+    width: '100%',
+    height: 120, // Ajuste para imagens menores
+    marginTop: 10,
+    borderRadius: 8,
   },
   pontoTitle: {
     fontSize: 20,

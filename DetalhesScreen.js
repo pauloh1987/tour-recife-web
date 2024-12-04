@@ -149,7 +149,10 @@ export default function DetalhesScreen() {
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
                 <View style={styles.feedbackItem}>
-                  <Text style={styles.feedbackUserName}>{item.userName || 'Anônimo'}</Text>
+                  <View style={styles.userFeedbackContainer}>
+                    <Image source={{uri: item.userImage}} style={styles.userImage} />
+                    <Text style={styles.feedbackUserName}>{item.userName || 'Anônimo'}</Text>
+                  </View>
                   <Text style={styles.feedbackRating}>Avaliação: {item.rating || 'Não avaliado'} ★</Text>
                   <Text style={styles.feedbackText}>{item.text}</Text>
                 </View>
@@ -286,6 +289,17 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     marginBottom: 10,
+  },
+  userFeedbackContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  userImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 10,
   },
   feedbackUserName: {
     fontSize: 14,

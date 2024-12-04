@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, Button, Modal, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Modal, TextInput, TouchableOpacity, Button, ImageBackground } from 'react-native';
 import { collection, addDoc, onSnapshot } from 'firebase/firestore';
 import { db } from './firebaseConfig'; // Certifique-se de que o firebaseConfig exporta o Firestore
 
@@ -21,7 +21,6 @@ export default function AgendaScreen() {
         eventsData[data.day].push(`${data.time} - ${data.description}`);
       });
 
-      console.log("Eventos carregados: ", eventsData);  // Mostra os eventos carregados no console
       setEvents(eventsData);  // Atualiza o estado 'events' com os dados carregados
     });
 
@@ -47,91 +46,114 @@ export default function AgendaScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Agenda Semanal</Text>
-      <ScrollView>
-        {Object.keys(events).length === 0 ? (
-          <Text style={styles.noEvents}>Nenhum evento encontrado</Text>
-        ) : (
-          Object.keys(events).map((day) => (
-            <View key={day} style={styles.dayContainer}>
-              <Text style={styles.day}>{day}</Text>
-              {events[day].map((event, index) => (
-                <Text key={index} style={styles.event}>{event}</Text>
-              ))}
-            </View>
-          ))
-        )}
-      </ScrollView>
+    <ImageBackground source={require('./assets/marco-zero.png')} style={styles.background}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Agenda Semanal</Text>
 
-      {/* Botão para adicionar evento */}
-      <TouchableOpacity
-        style={styles.addButton}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={styles.addButtonText}>+ Adicionar Evento</Text>
-      </TouchableOpacity>
+        <ScrollView style={styles.scrollContainer}>
+          {Object.keys(events).length === 0 ? (
+            <Text style={styles.noEvents}>Nenhum evento encontrado</Text>
+          ) : (
+            Object.keys(events).map((day) => (
+              <View key={day} style={styles.dayContainer}>
+                <Text style={styles.day}>{day}</Text>
+                {events[day].map((event, index) => (
+                  <Text key={index} style={styles.event}>{event}</Text>
+                ))}
+              </View>
+            ))
+          )}
+        </ScrollView>
 
-      {/* Modal para adicionar evento */}
-      <Modal
-        visible={modalVisible}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Adicionar Evento</Text>
-            <TextInput
-              placeholder="Dia (ex: Segunda-feira)"
-              value={newEvent.day}
-              onChangeText={(text) => setNewEvent({ ...newEvent, day: text })}
-              style={styles.input}
-            />
-            <TextInput
-              placeholder="Horário (ex: 10:00)"
-              value={newEvent.time}
-              onChangeText={(text) => setNewEvent({ ...newEvent, time: text })}
-              style={styles.input}
-            />
-            <TextInput
-              placeholder="Descrição do evento"
-              value={newEvent.description}
-              onChangeText={(text) => setNewEvent({ ...newEvent, description: text })}
-              style={styles.input}
-            />
-            <View style={styles.modalButtons}>
-              <Button title="Adicionar" onPress={handleAddEvent} />
-              <Button title="Cancelar" onPress={() => setModalVisible(false)} color="red" />
+        {/* Botão para adicionar evento */}
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={styles.addButtonText}>+ Adicionar Evento</Text>
+        </TouchableOpacity>
+
+        {/* Modal para adicionar evento */}
+        <Modal
+          visible={modalVisible}
+          animationType="slide"
+          transparent={true}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <Text style={styles.modalTitle}>Adicionar Evento</Text>
+              <TextInput
+                placeholder="Dia (ex: Segunda-feira)"
+                value={newEvent.day}
+                onChangeText={(text) => setNewEvent({ ...newEvent, day: text })}
+                style={styles.input}
+              />
+              <TextInput
+                placeholder="Horário (ex: 10:00)"
+                value={newEvent.time}
+                onChangeText={(text) => setNewEvent({ ...newEvent, time: text })}
+                style={styles.input}
+              />
+              <TextInput
+                placeholder="Descrição do evento"
+                value={newEvent.description}
+                onChangeText={(text) => setNewEvent({ ...newEvent, description: text })}
+                style={styles.input}
+              />
+              <View style={styles.modalButtons}>
+                <Button title="Adicionar" onPress={handleAddEvent} />
+                <Button title="Cancelar" onPress={() => setModalVisible(false)} color="red" />
+              </View>
             </View>
           </View>
-        </View>
-      </Modal>
-    </View>
+        </Modal>
+      </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: '#fff',
+    padding: 20,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',  // Translucent background to give a modern look
   },
   title: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: 'bold',
-    marginBottom: 16,
+    marginBottom: 20,
+    color: '#fff',
+  },
+  scrollContainer: {
+    flex: 1,
+    width: '100%',
   },
   dayContainer: {
-    marginBottom: 16,
+    marginBottom: 20,
+    padding: 10,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
   },
   day: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
+    color: '#007bff',
   },
   event: {
     fontSize: 16,
     color: 'gray',
+    marginTop: 5,
   },
   noEvents: {
     fontSize: 18,
@@ -140,10 +162,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   addButton: {
-    backgroundColor: '#0066cc',
+    backgroundColor: '#28a745',
     padding: 12,
-    borderRadius: 5,
-    marginTop: 16,
+    borderRadius: 25,
+    marginTop: 20,
+    width: '80%',
     alignItems: 'center',
   },
   addButtonText: {
@@ -166,6 +189,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
+    textAlign: 'center',
   },
   input: {
     borderWidth: 1,

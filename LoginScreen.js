@@ -7,24 +7,35 @@ import {
   StyleSheet,
   Image,
   KeyboardAvoidingView,
-  ScrollView,
-  Keyboard,
   Platform,
   ImageBackground,
 } from 'react-native';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'; // Importando os métodos de autenticação
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleLogin = () => {
+  // Função para autenticar o usuário
+  const handleLogin = async () => {
     if (!email || !password) {
       setErrorMessage('Preencha todos os campos!');
       return;
     }
-    console.log('Login realizado com sucesso!');
-    navigation.replace('Home');
+
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user; // Obtendo o usuário logado
+      console.log('Login realizado com sucesso!', user);
+
+      // Após o login bem-sucedido, redireciona para a tela principal
+      navigation.replace('Home');
+    } catch (error) {
+      console.error('Erro ao fazer login:', error.message);
+      setErrorMessage('Credenciais inválidas. Tente novamente.');
+    }
   };
 
   return (

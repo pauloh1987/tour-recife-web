@@ -7,7 +7,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyBnl_z9y4bVsaH6V7EDHIQxUGC--A8Qn_M",
   authDomain: "tour-recife.firebaseapp.com",
   projectId: "tour-recife",
-  storageBucket: "tour-recife.appspot.com", // Correção do erro no bucket
+  storageBucket: "tour-recife.firebasestorage.app", // Correção do erro no bucket
   messagingSenderId: "130813320192",
   appId: "1:130813320192:web:0e4f7717556cc58a5a8ce5",
   measurementId: "G-ZNWTFCDD9N",
@@ -51,11 +51,15 @@ export const uploadProfileImage = async (userId, fileUri) => {
     const blob = await response.blob();
 
     const storageRef = ref(storage, `profileImages/${userId}`);
-    await uploadBytes(storageRef, blob);
+    const metadata = {
+      contentType: 'image/jpeg', // ou 'image/png' dependendo do tipo da imagem
+    };
+  
+    await uploadBytes(storageRef, blob, metadata);
 
     const downloadURL = await getDownloadURL(storageRef);
     console.log('Imagem enviada com sucesso:', downloadURL);
-    return downloadURL;
+    return downloadURL; // Retorna a URL da imagem para ser salva no Firestore
   } catch (error) {
     console.error('Erro ao fazer upload da imagem:', error);
     throw new Error('Erro ao enviar a imagem. Tente novamente.');
